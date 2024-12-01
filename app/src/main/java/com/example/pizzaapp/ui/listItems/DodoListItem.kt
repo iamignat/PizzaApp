@@ -69,13 +69,13 @@ fun DodoListItem(
                         text = item.title,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(top = 5.dp),
+                        modifier = Modifier.padding(top = 5.dp, start = 10.dp),
                         lineHeight = TextUnit(20.0F, TextUnitType.Sp)
                     )
                     Text(
                         text = item.ingredients,
                         fontSize = 15.sp,
-                        modifier = Modifier.padding(top = 5.dp),
+                        modifier = Modifier.padding(top = 10.dp, start = 10.dp),
                         textAlign = TextAlign.Justify,
                         lineHeight = TextUnit(15.0F, TextUnitType.Sp)
                     )
