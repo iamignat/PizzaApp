@@ -23,24 +23,33 @@ import kotlinx.coroutines.withContext
 @Composable
 fun DodoPizzaScreen() {
     var dodoList by rememberSaveable { mutableStateOf<List<ListItem>>(emptyList()) }
+    var filteredList by rememberSaveable { mutableStateOf<List<ListItem>>(emptyList()) }
 
     LaunchedEffect(Unit) {
         val parser: Parser = DodoParser()
         withContext(Dispatchers.IO) {
             dodoList = parser.getParsedData()
+            filteredList = dodoList
         }
     }
 
     Scaffold(
-        topBar = { TopBar("Пицца лисица") }
+        topBar = {
+            TopBar("Пицца лисица") { filter ->
+                filteredList = if (filter.isEmpty()) {
+                    dodoList
+                } else {
+                    dodoList.filter { it.ingredients.contains(filter, ignoreCase = true) }
+                }
+            }
+        }
     ) { innerPadding ->
         LazyColumn(
-            modifier =
-            Modifier
+            modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            items(dodoList) { item ->
+            items(filteredList) { item ->
                 DodoListItem(item = item)
             }
         }
