@@ -15,7 +15,7 @@ object NavBarItems {
             route = "pizza_dominos",
         ),
         BarItem(
-            title = "ДОДО пицца",
+            title = "Додо Пицца",
             image = R.drawable.dodo,
             route = "pizza_dodo",
         ),

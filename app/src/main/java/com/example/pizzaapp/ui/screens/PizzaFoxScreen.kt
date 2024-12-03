@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import com.example.pizzaapp.ui.components.TopBar
 import com.example.pizzaapp.ui.listItems.FoxListItem
 import com.example.pizzaapp.ui.theme.BackgroundColor
+import com.example.pizzaapp.ui.theme.Orange
 import com.example.pizzaapp.util.ListItem
 import com.example.pizzaapp.util.parser.FoxParser
 import com.example.pizzaapp.util.parser.Parser
@@ -32,6 +33,7 @@ fun PizzaFoxScreen() {
 
     Scaffold(
         containerColor = BackgroundColor,
+        modifier = Modifier.fillMaxSize(),
         topBar = {
             TopBar("Пицца Лисица") { filter ->
                 filteredList = if (filter.isEmpty()) {
