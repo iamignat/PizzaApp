@@ -14,6 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.example.pizzaapp.ui.components.TopBar
 import com.example.pizzaapp.ui.listItems.DodoListItem
+import com.example.pizzaapp.ui.theme.BackgroundColor
 import com.example.pizzaapp.util.ListItem
 import com.example.pizzaapp.util.parser.DodoParser
 import com.example.pizzaapp.util.parser.Parser
@@ -33,7 +34,7 @@ fun DodoPizzaScreen() {
         }
     }
 
-    Scaffold(
+    Scaffold(containerColor = BackgroundColor,
         topBar = {
             TopBar("Пицца лисица") { filter ->
                 filteredList = if (filter.isEmpty()) {

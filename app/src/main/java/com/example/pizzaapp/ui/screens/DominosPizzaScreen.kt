@@ -10,6 +10,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import com.example.pizzaapp.ui.components.TopBar
 import com.example.pizzaapp.ui.listItems.DominosListItem
+import com.example.pizzaapp.ui.theme.BackgroundColor
 import com.example.pizzaapp.util.ListItem
 import com.example.pizzaapp.util.parser.DominosParser
 import com.example.pizzaapp.util.parser.Parser
@@ -29,7 +30,7 @@ fun DominosPizzaScreen() {
         }
     }
 
-    Scaffold(
+    Scaffold(containerColor = BackgroundColor,
         topBar = {
             TopBar("Пицца Доминос") { filter ->
                 filteredList = if (filter.isEmpty()) {

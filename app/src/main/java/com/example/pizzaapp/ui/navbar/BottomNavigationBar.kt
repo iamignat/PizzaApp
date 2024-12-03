@@ -16,8 +16,8 @@ import com.example.pizzaapp.util.NavBarItems
 @Composable
 fun BottomNavigationBar(navController: NavController) {
     NavigationBar(
-//        containerColor = Color(0xFFFFFFFF),
-//        contentColor = Color(0xFF444444),
+        containerColor = Color(0xFFFFFFFF),
+        contentColor = Color(0xFF444444),
     ) {
         val backStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = backStackEntry?.destination?.route
