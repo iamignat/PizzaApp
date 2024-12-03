@@ -1,5 +1,6 @@
 package com.example.pizzaapp.util
 
+import androidx.compose.ui.text.font.FontWeight
 import com.example.pizzaapp.R
 import com.example.pizzaapp.ui.theme.Black
 import com.example.pizzaapp.ui.theme.DodoFontFamily
@@ -17,7 +18,8 @@ object NavBarItems {
             route = "pizza_fox",
             font = MalinaFontFamily,
             color = Orange,
-            selectedColor = FoxSelected
+            selectedColor = FoxSelected,
+            fontWeight = FontWeight.Bold,
         ),
         BarItem(
             title = "Domino's",
@@ -25,7 +27,8 @@ object NavBarItems {
             route = "pizza_dominos",
             font = GothamProFontFamily,
             color = Black,
-            selectedColor = OtherSelected
+            selectedColor = OtherSelected,
+            fontWeight = FontWeight.Bold,
         ),
         BarItem(
             title = "Додо Пицца",
@@ -33,7 +36,8 @@ object NavBarItems {
             route = "pizza_dodo",
             font = DodoFontFamily,
             color = Black,
-            selectedColor = OtherSelected
+            selectedColor = OtherSelected,
+            fontWeight = FontWeight.W600
         ),
     )
 }

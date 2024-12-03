@@ -11,7 +11,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -50,7 +49,7 @@ fun BottomNavigationBar(navController: NavController) {
             }, label = {
                 Text(
                     color= navItem.color, text = navItem.title, fontFamily = navItem.font,
-                    fontWeight = FontWeight.W600
+                    fontWeight = navItem.fontWeight
                 )
             })
         }
