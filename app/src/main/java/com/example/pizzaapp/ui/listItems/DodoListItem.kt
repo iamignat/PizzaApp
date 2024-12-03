@@ -133,7 +133,7 @@ fun DodoListItem(
                         fontSize = 20.sp,
                         modifier = Modifier.padding(0.dp),
                         fontFamily = DodoFontFamily,
-                        fontWeight = FontWeight.Normal
+                        fontWeight = FontWeight.W500
                     )
                 }
             }
