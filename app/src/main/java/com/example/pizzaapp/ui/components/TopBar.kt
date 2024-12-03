@@ -1,40 +1,36 @@
 package com.example.pizzaapp.ui.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(title: String, onFilterChange: (String) -> Unit) {
-    val textState = rememberSaveable { mutableStateOf("") }
-
+fun TopBar(
+    title: String,
+    onOpenFilterPanel: () -> Unit
+) {
     TopAppBar(
-        title = { Text(text = title) },
-        actions = {
-            OutlinedTextField(
-                value = textState.value,
-                onValueChange = {
-                    textState.value = it
-                    onFilterChange(it)
-                },
-                placeholder = { Text("Фильтр…") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 8.dp),
-                singleLine = true,
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = MaterialTheme.colorScheme.surface,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
-                    focusedIndicatorColor = MaterialTheme.colorScheme.primary,
-                    unfocusedIndicatorColor = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            )
+        title = {
+            Text(text = title)
         },
-        modifier = Modifier.fillMaxWidth()
+        actions = {
+            IconButton(
+                onClick = onOpenFilterPanel,
+                modifier = Modifier.padding(end = 10.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = "Filter",
+                    modifier = Modifier.size(28.dp)
+                )
+            }
+        },
     )
 }
