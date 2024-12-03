@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(title: String, onFilterChange: (String) -> Unit) {
-    var textState = rememberSaveable { mutableStateOf("") }
+    val textState = rememberSaveable { mutableStateOf("") }
 
     TopAppBar(
         title = { Text(text = title) },
@@ -22,7 +22,7 @@ fun TopBar(title: String, onFilterChange: (String) -> Unit) {
                     textState.value = it
                     onFilterChange(it)
                 },
-                placeholder = { Text("Фильтр...") },
+                placeholder = { Text("Фильтр…") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 8.dp),
