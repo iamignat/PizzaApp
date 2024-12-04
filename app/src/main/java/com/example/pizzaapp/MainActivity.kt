@@ -39,21 +39,16 @@ fun Main() {
             modifier = Modifier.weight(1f)
         ) {
             composable(Routes.PizzaFoxScreen.route) {
-                PizzaFoxScreen(
-                    onNavigateAway = { navController.navigate(Routes.PizzaFoxScreen.route) }
-                )
+                PizzaFoxScreen()
             }
             composable(Routes.DominosPizzaScreen.route) {
-                DominosPizzaScreen(
-                    onNavigateAway = { navController.navigate(Routes.DominosPizzaScreen.route) }
-                )
+                DominosPizzaScreen()
             }
             composable(Routes.DodoPizzaScreen.route) {
-                DodoPizzaScreen(
-                    onNavigateAway = { navController.navigate(Routes.DodoPizzaScreen.route) }
-                )
+                DodoPizzaScreen()
             }
         }
         BottomNavigationBar(navController = navController)
     }
 }
+
