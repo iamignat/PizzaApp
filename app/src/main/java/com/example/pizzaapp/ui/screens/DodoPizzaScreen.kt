@@ -88,8 +88,9 @@ fun DodoPizzaScreen(onNavigateAway: () -> Unit) {
                             val itemIngredients = item.ingredients.split(",").map { it.trim().lowercase() }.toSet()
                             val includeSet = if (include.isNotEmpty()) include.split(",").map { it.trim().lowercase() }.toSet() else emptySet()
                             val excludeSet = if (exclude.isNotEmpty()) exclude.split(",").map { it.trim().lowercase() }.toSet() else emptySet()
-                            (includeSet.isEmpty() || itemIngredients.containsAll(includeSet)) &&
-                                    (excludeSet.isEmpty() || excludeSet.none { it in itemIngredients })
+                            val includeMatch = includeSet.isEmpty() || includeSet.all { keyword -> itemIngredients.any { it.contains(keyword) } }
+                            val excludeMatch = excludeSet.isEmpty() || excludeSet.none { keyword -> itemIngredients.any { it.contains(keyword) } }
+                            includeMatch && excludeMatch
                         }
                     },
                     onResetFilters = {
