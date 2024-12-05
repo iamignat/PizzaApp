@@ -17,6 +17,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxColors
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
@@ -31,8 +33,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.pizzaapp.ui.theme.AcceptCheckboxColor
+import com.example.pizzaapp.ui.theme.DeclineCheckboxColor
 import com.example.pizzaapp.ui.theme.White
 
 
@@ -66,21 +71,21 @@ fun FilterPanel(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 40.dp, bottom = 30.dp),
+                    .padding(top = 30.dp),
                 horizontalArrangement = Arrangement.End
             ) {
                 IconButton(onClick = onClose) {
                     Icon(
                         imageVector = Icons.Default.Search,
                         contentDescription = "Filter",
-                        modifier = Modifier.size(28.dp),
+                        modifier = Modifier.size(30.dp),
                         tint = color
                     )
                 }
             }
 
             // Include Ingredients Checkbox
-            Text(text = "Включить ингредиенты", fontFamily = font, color = color, fontSize = 16.sp)
+            Text(text = "Включить ингредиенты", fontFamily = font, color = color, fontSize = 18.sp, fontWeight = FontWeight.Bold)
             ingredients.forEach { ingredient ->
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -94,16 +99,21 @@ fun FilterPanel(
                             } else {
                                 includeIngredients - ingredient
                             }
-                        }
+                        },
+                        colors = CheckboxDefaults.colors(
+                            checkedColor = AcceptCheckboxColor,
+                            checkmarkColor = White,
+                            uncheckedColor = color
+                        )
                     )
-                    Text(text = ingredient, fontFamily = font, color = color, fontSize = 14.sp)
+                    Text(text = ingredient, fontFamily = font, color = color, fontSize = 16.sp)
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(15.dp))
 
             // Exclude Ingredients Checkbox
-            Text(text = "Исключить ингредиенты", fontFamily = font, color = color, fontSize = 16.sp)
+            Text(text = "Исключить ингредиенты", fontFamily = font, color = color, fontSize = 18.sp, fontWeight = FontWeight.Bold)
             ingredients.forEach { ingredient ->
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -117,9 +127,14 @@ fun FilterPanel(
                             } else {
                                 excludeIngredients - ingredient
                             }
-                        }
+                        },
+                        colors = CheckboxDefaults.colors(
+                            checkedColor = DeclineCheckboxColor,
+                            checkmarkColor = White,
+                            uncheckedColor = color
+                        )
                     )
-                    Text(text = ingredient, fontFamily = font, color = color, fontSize = 14.sp)
+                    Text(text = ingredient, fontFamily = font, color = color, fontSize = 16.sp)
                 }
             }
 
