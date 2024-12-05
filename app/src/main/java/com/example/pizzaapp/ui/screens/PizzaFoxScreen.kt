@@ -44,6 +44,7 @@ fun PizzaFoxScreen(onNavigateAway: () -> Unit) {
     var foxList by rememberSaveable { mutableStateOf<List<ListItem>>(emptyList()) }
     var filteredList by rememberSaveable { mutableStateOf<List<ListItem>>(emptyList()) }
     var showFilterPanel by rememberSaveable { mutableStateOf(false) }
+    val excludeListIngredients = listOf("")
 
     LaunchedEffect(Unit) {
         val parser: Parser = FoxParser()
@@ -53,16 +54,9 @@ fun PizzaFoxScreen(onNavigateAway: () -> Unit) {
         }
     }
 
-    val lifecycleOwner = LocalLifecycleOwner.current
-    DisposableEffect(lifecycleOwner) {
-        val observer = LifecycleEventObserver { _, event ->
-            if (event == Lifecycle.Event.ON_STOP) {
-                showFilterPanel = false
-            }
-        }
-        lifecycleOwner.lifecycle.addObserver(observer)
-        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
-    }
+    val ingredients = foxList.flatMap { it.ingredients.split(Regex("[,/]|\\s+и\\s+")).map { it.trim().lowercase() } }
+        .distinct()
+        .filter { it !in excludeListIngredients }
 
     BackHandler(enabled = showFilterPanel) {
         showFilterPanel = false
@@ -111,13 +105,14 @@ fun PizzaFoxScreen(onNavigateAway: () -> Unit) {
             )
             Box(modifier = Modifier.fillMaxSize()) {
                 FilterPanel(
+                    ingredients = ingredients,
                     onFilterChange = { include, exclude ->
                         filteredList = foxList.filter { item ->
-                            val itemIngredients = item.ingredients.split(",").map { it.trim().lowercase() }.toSet()
-                            val includeSet = if (include.isNotEmpty()) include.split(",").map { it.trim().lowercase() }.toSet() else emptySet()
-                            val excludeSet = if (exclude.isNotEmpty()) exclude.split(",").map { it.trim().lowercase() }.toSet() else emptySet()
-                            val includeMatch = includeSet.isEmpty() || includeSet.all { keyword -> itemIngredients.any { it.contains(keyword) } }
-                            val excludeMatch = excludeSet.isEmpty() || excludeSet.none { keyword -> itemIngredients.any { it.contains(keyword) } }
+                            val itemIngredients = item.ingredients.split(Regex("[,/]|\\s+и\\s+")).map { it.trim().lowercase() }.toSet()
+
+                            val includeMatch = include.isEmpty() || include.all { it.lowercase() in itemIngredients }
+                            val excludeMatch = exclude.isEmpty() || exclude.none { it.lowercase() in itemIngredients }
+
                             includeMatch && excludeMatch
                         }
                     },
